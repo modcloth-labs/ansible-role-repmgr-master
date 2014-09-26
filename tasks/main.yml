@@ -1,0 +1,13 @@
+---
+- name: "install repmgr"
+  apt: name=repmgr state=present
+- name: "update postgres settings"
+  template:
+    src=postgresql.conf.j2
+    dest="{{repmgr_postgresql_conf_file}}"
+- name: "create repmgr conf"
+  template:
+    src=repmgr.conf.j2
+    dest="{{repmgr_conf_file}}"
+- name: "reload postgres"
+  service: name={{repmgr_postgresql_service_name}} state=reloaded

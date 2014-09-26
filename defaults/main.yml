@@ -1,0 +1,23 @@
+---
+repmgr_postgresql_service_name: 'postgresql'
+
+# Defaults for PostgreSQL conf
+
+# Should be a file in include_dir directory of postgresql.conf
+repmgr_postgresql_conf_file: /etc/postgresql/conf.d/repmgr-master.conf
+repmgr_postgresql_max_wal_senders: 10 # Should be > 0
+repmgr_postgresql_wal_keep_segments: 5000 # Should be >= 5000
+repmgr_postgresql_archive_command: 'true' # Dummy command that exits 0
+
+# Postgres user for standbys to connect with
+repmgr_postgresql_standby_user: repmgr
+repmgr_postgresql_standby_user_password: repmgr
+
+repmgr_conf_file: /etc/repmgr.conf
+# repmgr options
+repmgr_node_id: 1
+repmgr_cluster: main
+repmgr_rsync_options: '--archive --checksum --compress --progress --rsh=ssh'
+repmgr_failover: automatic
+repmgr_loglevel: NOTICE
+repmgr_logfacility: STDERR
